@@ -22,8 +22,13 @@ x = np.array( [x for x in range(1, 101)] )
 x = torch.from_numpy(x).float()
 y = torch.from_numpy(HUNDRED_PI).float()
 
+x = torch.div(x , torch.tensor(100))
+y = torch.div(y, torch.tensor(100))
+
 x = x.unsqueeze(dim=1)
 y = y.unsqueeze(dim=1)
+
+# model
 
 class basic_network(nn.Module):
     def __init__(self):
@@ -35,3 +40,32 @@ class basic_network(nn.Module):
         return self.layer1(x)
 
 model = basic_network()
+
+# loss = abs(prediction - expected)
+
+loss_fn = nn.L1Loss()
+
+
+# optimizer
+
+optimizer = torch.optim.SGD(model.parameters(), lr=0.1)
+
+# put the model in training mode
+# get a prediction
+# calculate the loss of that prediction
+# zero the optimizer
+# perform backpropagation and gradient descent
+
+for i in range(10):
+    model.train()
+
+    pred = model(x)
+
+    loss = loss_fn(pred, y)
+
+    optimizer.zero_grad()
+
+    loss.backward()
+    optimizer.step()
+
+    print(f"loss {loss}")
