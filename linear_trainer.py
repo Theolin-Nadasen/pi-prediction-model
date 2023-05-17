@@ -13,6 +13,25 @@ x = np.array( [x for x in range(1, 101)] )
 
 # Visualize our data
 
-plt.scatter(x, HUNDRED_PI, c="r")
-plt.plot(x, HUNDRED_PI)
-plt.show()
+#plt.scatter(x, HUNDRED_PI, c="r")
+#plt.plot(x, HUNDRED_PI)
+#plt.show()
+
+# [ [1], [4], [1] ......]
+
+x = torch.from_numpy(x).float()
+y = torch.from_numpy(HUNDRED_PI).float()
+
+x = x.unsqueeze(dim=1)
+y = y.unsqueeze(dim=1)
+
+class basic_network(nn.Module):
+    def __init__(self):
+        super().__init__()
+
+        self.layer1 = nn.Linear(1, 1)
+
+    def forward(self, x):
+        return self.layer1(x)
+
+model = basic_network()

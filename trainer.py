@@ -44,7 +44,7 @@ optimizer = torch.optim.SGD(model.parameters(), lr=0.1)
 
 # loop
 
-epochs = 10
+epochs = 100
 
 for epoch in range(epochs):
     model.train()
