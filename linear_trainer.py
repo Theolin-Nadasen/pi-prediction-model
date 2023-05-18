@@ -48,7 +48,7 @@ loss_fn = nn.L1Loss()
 
 # optimizer
 
-optimizer = torch.optim.SGD(model.parameters(), lr=0.1)
+optimizer = torch.optim.SGD(model.parameters(), lr=0.001)
 
 # put the model in training mode
 # get a prediction
@@ -56,7 +56,7 @@ optimizer = torch.optim.SGD(model.parameters(), lr=0.1)
 # zero the optimizer
 # perform backpropagation and gradient descent
 
-for i in range(10):
+for i in range(5000):
     model.train()
 
     pred = model(x)
@@ -69,3 +69,5 @@ for i in range(10):
     optimizer.step()
 
     print(f"loss {loss}")
+
+torch.save(model.state_dict(), "Linear_model.pth")
